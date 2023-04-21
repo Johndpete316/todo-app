@@ -11,6 +11,7 @@ const Home = () => {
     const [user, loading, error] = useAuthState(auth)
     const navigate = useNavigate()
 
+
     useEffect(() => {
         if (loading) return
         if (!user) navigate('/')
