@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# config files
+
+config.json
+config.ts
+firebase_config.ts
