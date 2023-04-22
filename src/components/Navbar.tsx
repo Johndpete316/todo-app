@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, logout, signInWithGoogle } from '../firebase'
 import '../styles/navbar.css'
