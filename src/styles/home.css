@@ -1,27 +1,54 @@
-.dashboard {
-  height: 100vh;
-  width: 100vw;
+.home {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #444444;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+  margin-top: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.home ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.home li {
   display: flex;
   align-items: center;
-  justify-content: center;
+  margin-bottom: 1rem;
+  cursor: pointer;
 }
-.dashboard__container {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  background-color: #444444;
-  padding: 30px;
+
+.home li.completed {
+  text-decoration: line-through;
+  color: #afdbb0;
+}
+
+.home input[type='checkbox'] {
+  margin-right: 0.5rem;
+}
+
+.home .new-todo input {
+  flex-grow: 1;
+  border: 2px solid #898484;
+  padding: 0.5rem;
   border-radius: 10px;
-  box-shadow: #969696 0px 0px 10px 0px;
+  font-size: 1rem;
 }
-.dashboard__btn {
-  padding: 10px;
-  font-size: 18px;
-  margin-top: 10px;
-  border: none;
-  color: white;
-  background-color: black;
+
+.home .new-todo input:focus {
+  outline: none;
+  border-color: #ba9eba;
 }
-.dashboard div {
-  margin-top: 7px;
+
+.home h3 {
+  text-align: center;
+  margin-bottom: 30px;
 }
