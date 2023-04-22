@@ -17,7 +17,7 @@ const Home: React.FC = () => {
     useEffect(() => {
         if (loading) return
         if (!user) navigate('/')
-        if(error) navigate('/error')
+        if(error) navigate('/')
     }, [user, loading, error, navigate])
 
 
