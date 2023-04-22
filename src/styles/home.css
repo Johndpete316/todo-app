@@ -52,6 +52,7 @@
 .home h3 {
   text-align: center;
   margin-bottom: 30px;
+  position: relative;
 }
 
 .todo-item {
@@ -100,4 +101,11 @@
   100% {
     transform: translateX(0);
   }
+}
+
+.date {
+  position: absolute;
+  right: 10px;
+  color: #c5c5c5;
+  font-size: 0.8rem;
 }

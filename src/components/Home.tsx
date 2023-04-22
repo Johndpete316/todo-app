@@ -115,9 +115,18 @@ const Home: React.FC = () => {
         }
     }
 
+    const today = new Date().toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+    });
+
     return (
         <div className="home">
-            <h3> //todos </h3>
+            <h3> //todos 
+
+                <span className="date"> 🗓️ {today}</span>
+            </h3>
             <ul>
                 {todos.map((todo) => (
                     <li
