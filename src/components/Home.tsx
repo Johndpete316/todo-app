@@ -17,7 +17,8 @@ const Home: React.FC = () => {
     useEffect(() => {
         if (loading) return
         if (!user) navigate('/')
-    }, [user, loading])
+        if(error) navigate('/error')
+    }, [user, loading, error, navigate])
 
 
     // create logic for react todo

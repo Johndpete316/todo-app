@@ -1,8 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getFirestore, query, doc, getDocs, getDoc, collection, where, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, verifyBeforeUpdateEmail} from "firebase/auth";
+import { getFirestore, query, doc, getDocs, collection, where, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut} from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -16,7 +15,6 @@ import { Todo } from './models/Todos'
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
@@ -30,8 +28,6 @@ const createTodo = (todo: Todo, UserID: string ) => {
     } catch (error) {
         console.error(error)
     }
-    
-
 }
 
 const updateTodo = async (todoid: string, completed: boolean, UserID: string) => {
