@@ -61,8 +61,8 @@
 
 .todo-item .date-text {
   position: absolute;
-  right: 30px;
-  top: -20px;
+  right: 20px;
+  top: -13px;
   font-size: 0.8rem;
   color: #898484;
 }

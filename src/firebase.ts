@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore, query, doc, getDocs, collection, where, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut} from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, signOut} from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -94,7 +94,10 @@ const googleProvider = new GoogleAuthProvider();
 
 const signInWithGoogle = async () => {
     try {
-        const res = await signInWithPopup(auth, googleProvider);
+        signInWithRedirect(auth, googleProvider);
+        const res = await getRedirectResult(auth);
+        if(!res) return;
+        
         const user = res.user
         const q = query(collection(db, "users"), where("uid", "==", user.uid));
         const docs = await getDocs(q);
