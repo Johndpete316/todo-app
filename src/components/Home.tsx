@@ -8,6 +8,8 @@ import { Todo } from '../models/Todos'
 
 const Home: React.FC = () => {
 
+    const interval = 5000; // 5 seconds
+
     const [todos, setTodos] = useState<Todo[]>([]);
     const [newTodoText, setNewTodoText] = useState<string>('');
 
@@ -24,21 +26,38 @@ const Home: React.FC = () => {
     // create logic for react todo
 
     useEffect(() => {
-        if (user) {
+        let timerId: NodeJS.Timeout;
+      
+        const fetchTodos = () => {
+          if (user) {
             getTodos(user.uid).then((todos) => {
-                if (!todos) return;
-                const todosMapped: Todo[] = todos.map((docData: any) => {
-                    return {
-                        id: docData.id,
-                        text: docData.text,
-                        completed: docData.completed,
-                        createdAt: docData.createdAt.toDate(),
-                    } as Todo;
-                });
-                setTodos(todosMapped);
+              if (!todos) return;
+              const todosMapped: Todo[] = todos.map((docData: any) => {
+                return {
+                  id: docData.id,
+                  text: docData.text,
+                  completed: docData.completed,
+                  createdAt: docData.createdAt.toDate(),
+                } as Todo;
+              });
+              setTodos(todosMapped);
             });
-        }
-    }, [user]);
+          }
+        };
+      
+        const startInterval = () => {
+          timerId = setInterval(() => {
+            fetchTodos();
+          }, interval);
+        };
+      
+        fetchTodos(); // Fetch todos initially
+        startInterval(); // Start fetching todos at regular intervals
+      
+        return () => {
+          clearInterval(timerId); // Clean up the interval when the component unmounts
+        };
+      }, [user, interval]);
 
     const handleCheckboxChange = (id: string) => {
 
