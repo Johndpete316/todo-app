@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore, query, doc, getDocs, getDoc, collection, where, addDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, query, doc, getDocs, getDoc, collection, where, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, verifyBeforeUpdateEmail} from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,6 +22,9 @@ const db = getFirestore(app);
 
 // todo document management
 const createTodo = (todo: Todo, UserID: string ) => {
+
+    if(!UserID) return;
+
     try {
         addDoc(collection(db, `${UserID}-todos`), todo)
     } catch (error) {
@@ -32,6 +35,8 @@ const createTodo = (todo: Todo, UserID: string ) => {
 }
 
 const updateTodo = async (todoid: string, completed: boolean, UserID: string) => {
+
+    if(!UserID) return;
 
     console.log(todoid)
 
@@ -48,6 +53,40 @@ const updateTodo = async (todoid: string, completed: boolean, UserID: string) =>
 
     } catch (error) {
         console.error(error)
+    }
+}
+
+const deleteTodo = async (todoid: string, UserID: string) => {
+
+    if(!UserID) return;
+
+    console.log(todoid)
+
+    try {
+        const q = query(collection(db, `${UserID}-todos`), where('id', '==', todoid))
+        const docs = await getDocs(q);
+        console.log(docs)
+
+        const todoRef = doc(db, `${UserID}-todos`, docs.docs[0].id)
+
+        await deleteDoc(todoRef)
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+const getTodos = async (UserID: string) => {
+
+    if(!UserID) return;
+
+    try {
+        const q = query(collection(db, `${UserID}-todos`));
+        const docs = await getDocs(q);
+        const todos = docs.docs.map((doc) => doc.data());
+        return todos;
+    } catch (error) {
+        console.error(error);
     }
 }
 
@@ -92,6 +131,8 @@ export {
     logout,
     signInWithGoogle,
     createTodo,
-    updateTodo
+    updateTodo,
+    deleteTodo,
+    getTodos
 }
 
