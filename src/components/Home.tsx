@@ -40,6 +40,11 @@ const Home: React.FC = () => {
                   createdAt: docData.createdAt.toDate(),
                 } as Todo;
               });
+
+              // Sort todos by createdAt date
+              todosMapped.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+
+
               setTodos(todosMapped);
             });
           }
